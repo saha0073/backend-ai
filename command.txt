@@ -1,0 +1,27 @@
+cmake .. -G "Visual Studio 17 2022" `
+    -DCMAKE_CXX_STANDARD_LIBRARIES="Crypt32.Lib User32.lib Advapi32.lib" `
+    -DCMAKE_BUILD_TYPE=Release `
+    -DCMAKE_CONFIGURATION_TYPES=Release `
+    -Dprotobuf_BUILD_TESTS=OFF `
+    -DgRPC_ZLIB_PROVIDER=package `
+    -DZLIB_INCLUDE_DIR="C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\zlib\1.2.13\include" `
+    -DZLIB_LIBRARY_RELEASE="C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\zlib\1.2.13\lib\Win64\Release\zlibstatic.lib" `
+    -DgRPC_SSL_PROVIDER=package `
+    -DLIB_EAY_LIBRARY_RELEASE="C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\OpenSSL\1.1.1t\Lib\Win64\VS2015\Release\libcrypto.lib" `
+    -DLIB_EAY_RELEASE="C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\OpenSSL\1.1.1t\Lib\Win64\VS2015\Release\libcrypto.lib" `
+    -DOPENSSL_INCLUDE_DIR="C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\OpenSSL\1.1.1t\include\Win64\VS2015" `
+    -DSSL_EAY_LIBRARY_RELEASE="C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\OpenSSL\1.1.1t\Lib\Win64\VS2015\Release\libssl.lib" `
+    -DSSL_EAY_RELEASE="C:\Program Files\Epic Games\UE_5.3\Engine\Source\ThirdParty\OpenSSL\1.1.1t\Lib\Win64\VS2015\Release\libssl.lib"
+
+
+        -DZLIB_LIBRARY_DEBUG="%UE_THIRD_PARTY_DIR%\zlib\v1.2.8\lib\Win64\VS2015\Debug\zlibstatic.lib" `
+            -DLIB_EAY_LIBRARY_DEBUG="%UE_THIRD_PARTY_DIR%\OpenSSL\1.1.1\Lib\Win64\VS2015\Debug\libcrypto.lib" `
+                -DLIB_EAY_DEBUG="%UE_THIRD_PARTY_DIR%\OpenSSL\1.1.1\Lib\Win64\VS2015\Debug\libcrypto.lib" `
+                    -DSSL_EAY_DEBUG="%UE_THIRD_PARTY_DIR%\OpenSSL\1.1.1\Lib\Win64\VS2015\Debug\libssl.lib" `
+                        -DSSL_EAY_LIBRARY_DEBUG="%UE_THIRD_PARTY_DIR%\OpenSSL\1.1.1\Lib\Win64\VS2015\Debug\libssl.lib" `
+    
+& E:\Projects\DevOps\grpc\.build\third_party\protobuf\Release\protoc.exe -I . --cpp_out=. ./helloworld.proto
+& E:\Projects\DevOps\grpc\.build\third_party\protobuf\Release\protoc.exe -I . --grpc_out=. --plugin=protoc-gen-grpc="E:\Projects\DevOps\grpc\.build\Release\grpc_cpp_plugin.exe" ./helloworld.proto
+
+& E:\Projects\DevOps\grpc_v1.35\grpc\.build\third_party\protobuf\Release\protoc.exe -I . --cpp_out=. ./helloworld.proto
+& E:\Projects\DevOps\grpc_v1.35\grpc\.build\third_party\protobuf\Release\protoc.exe -I . --grpc_out=. --plugin=protoc-gen-grpc="E:\Projects\DevOps\grpc_v1.35\grpc\.build\Release\grpc_cpp_plugin.exe" ./helloworld.proto

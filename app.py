@@ -21,23 +21,26 @@ class UserInput(BaseModel):
 assistant_id = None
 thread_id = None
 
-@app.on_event("startup")
+
 async def startup_event():
     global assistant_id, thread_id
     # Create file for knowledge retrieval (modify as needed)
     file = client.files.create(file=open("seedworld_website.txt", "rb"), purpose='assistants')
     # Create the assistant
+    '''
     assistant = client.beta.assistants.create(
         name="seedworld greeter",
         description="you are seedworld greeter, answer questions about seedworld",
         model="gpt-4-1106-preview",
         tools=[{"type": "retrieval"}],
         file_ids=[file.id]
-    )
-    assistant_id = assistant.id
+    )'''
+    assistant_id = "asst_jghYoFw67tKaQ056C902Mp2z"
     # Create a new thread
     thread = client.beta.threads.create()
     thread_id = thread.id
+
+app.add_event_handler("startup", startup_event)
 
 @app.post("/ask/")
 async def ask_question(input: UserInput):
@@ -59,7 +62,7 @@ async def ask_question(input: UserInput):
     )
 
     # Wait for the response to be generated
-    time.sleep(6)  # Adjust the sleep time as needed
+    #time.sleep(6)  # Adjust the sleep time as needed
 
     # Retrieve the latest messages from the thread
     messages = client.beta.threads.messages.list(
